@@ -39,3 +39,8 @@ libraryDependencies ++= Seq(
   "eu.timepit" %% "refined-scopt"           % "0.9.13", // optional
   "eu.timepit" %% "refined-shapeless"       % "0.9.13"  // optional
 )
+
+// Akka
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-stream" % "2.6.3"
+)
