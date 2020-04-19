@@ -20,6 +20,12 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-effect" % "2.0.0"
 )
 
+// ZIO
+libraryDependencies ++= Seq(
+  "dev.zio" %% "zio" % "1.0.0-RC18-2",
+  "dev.zio" %% "zio-streams" % "1.0.0-RC18-2"
+)
+
 // Refined
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined"                 % "0.9.13",
