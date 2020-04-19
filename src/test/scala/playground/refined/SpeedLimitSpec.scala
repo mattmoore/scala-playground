@@ -31,19 +31,19 @@ class SpeedLimitSpec extends AnyFunSpec with Matchers {
 
   describe("Combine refinement types with pattern matching to issue a speeding ticket.") {
     def checkSpeed(speed: Int) = speed match {
-      case LegalSpeedLimit(speed) => "You're fine. Have a good day, citizen!"
-      case IllegalSpeedLimit(speed) => "You're speeding! Ticket issued!"
+      case LegalSpeedLimit(speed) => s"Your speed is $speed. You're fine. Have a good day, citizen!"
+      case IllegalSpeedLimit(speed) => s"Your speed is $speed. You're speeding! Ticket issued!"
     }
 
     describe("when speed limit is under the limit") {
       it("does nothing, because the driver is obeying the limit") {
-        checkSpeed(60) shouldBe "You're fine. Have a good day, citizen!"
+        checkSpeed(60) shouldBe "Your speed is 60. You're fine. Have a good day, citizen!"
       }
     }
 
     describe("when speed limit is over the limit") {
       it("issues a ticket") {
-        checkSpeed(61) shouldBe "You're speeding! Ticket issued!"
+        checkSpeed(61) shouldBe "Your speed is 61. You're speeding! Ticket issued!"
       }
     }
   }
