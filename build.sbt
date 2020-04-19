@@ -13,6 +13,12 @@ lazy val root = (project in file("."))
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
 
+// Cats
+libraryDependencies ++= Seq(
+  "org.typelevel" %% "cats-core" % "2.0.0",
+  "org.typelevel" %% "cats-effect" % "2.0.0"
+)
+
 // Refined
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined"                 % "0.9.13",
