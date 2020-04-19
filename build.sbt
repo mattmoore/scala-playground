@@ -12,3 +12,17 @@ lazy val root = (project in file("."))
   )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
+
+// Refined
+libraryDependencies ++= Seq(
+  "eu.timepit" %% "refined"                 % "0.9.13",
+  "eu.timepit" %% "refined-cats"            % "0.9.13", // optional
+  "eu.timepit" %% "refined-eval"            % "0.9.13", // optional, JVM-only
+  "eu.timepit" %% "refined-jsonpath"        % "0.9.13", // optional, JVM-only
+  "eu.timepit" %% "refined-pureconfig"      % "0.9.13", // optional, JVM-only
+  "eu.timepit" %% "refined-scalacheck"      % "0.9.13", // optional
+  "eu.timepit" %% "refined-scalaz"          % "0.9.13", // optional
+  "eu.timepit" %% "refined-scodec"          % "0.9.13", // optional
+  "eu.timepit" %% "refined-scopt"           % "0.9.13", // optional
+  "eu.timepit" %% "refined-shapeless"       % "0.9.13"  // optional
+)
