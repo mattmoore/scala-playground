@@ -1,7 +1,8 @@
 package playground.refined
 
 import eu.timepit.refined.api.{Refined, RefinedTypeOps}
-import eu.timepit.refined.boolean.{And, Or}
+import eu.timepit.refined.boolean.{And, Not, Or}
+import eu.timepit.refined.numeric.Interval.OpenClosed
 import eu.timepit.refined.numeric._
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
@@ -29,11 +30,11 @@ class SpeedLimitSpec extends AnyFunSpec with Matchers {
 
   describe("Using refinement types + pattern matching to determine whether to issue a speeding ticket.") {
     // Define refined type to represent speeds that fall at or below the legal speed limit of 60
-    type LegalSpeed = Int Refined (Greater[0] And LessEqual[60])
+    type LegalSpeed = Int Refined OpenClosed[0, 60]
     object LegalSpeed extends RefinedTypeOps[LegalSpeed, Int]
 
     // Define refined type to represent speeds that fall above the legal speed limit of 60
-    type IllegalSpeed = Int Refined (Less[0] Or Greater[60])
+    type IllegalSpeed = Int Refined Not[OpenClosed[0, 60]]
     object IllegalSpeed extends RefinedTypeOps[IllegalSpeed, Int]
 
     def checkSpeed(speed: Int) = speed match {
