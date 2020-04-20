@@ -8,7 +8,7 @@ import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
 class SpeedLimitSpec extends AnyFunSpec with Matchers {
-  describe("The \"old fashioned\" way we might do  this in Scala without refinement types.") {
+  describe("The \"old fashioned\" way we might do this in Scala without refinement types.") {
     def checkSpeed(speed: Int): String =
       speed match {
         case speed if speed >= 0 && speed <= 60 => s"Your speed is $speed. You're fine. Have a good day, citizen!"
