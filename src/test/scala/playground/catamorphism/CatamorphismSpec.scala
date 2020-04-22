@@ -6,11 +6,15 @@ import org.scalatest.matchers.should.Matchers
 class CatamorphismSpec extends AnyFunSpec with Matchers {
   describe("fold") {
     describe("combines list of numbers via an operation") {
-      def combine =
+      def sum =
+        List(1, 2, 3).fold(0)((a, b) => a + b)
+
+      def sumShorthand =
         List(1, 2, 3).fold(0)(_ + _)
 
       it("should sum the numbers") {
-        combine shouldBe 6
+        sum shouldBe 6
+        sumShorthand shouldBe 6
       }
     }
 
@@ -24,8 +28,13 @@ class CatamorphismSpec extends AnyFunSpec with Matchers {
       def transformEmails =
         people.foldLeft(List[String]())((a, b) => a :+ b.email)
 
+      def transformEmailsShorthand =
+        people.foldLeft(List[String]())(_ :+ _.email)
+
       it("should transform the people list into an email list") {
-        transformEmails shouldBe List("matt@mattmoore.io", "jane@janedoe.io")
+        val expected = List("matt@mattmoore.io", "jane@janedoe.io")
+        transformEmails shouldBe expected
+        transformEmailsShorthand shouldBe expected
       }
     }
   }
