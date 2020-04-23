@@ -8,7 +8,7 @@ ThisBuild / scapegoatVersion := "1.4.3"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "Scala Playground",
+    name := "scala-playground",
     libraryDependencies += scalaTest % Test
   )
 
