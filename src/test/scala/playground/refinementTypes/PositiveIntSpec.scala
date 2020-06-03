@@ -1,4 +1,4 @@
-package playground.refined
+package playground.refinementTypes
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
