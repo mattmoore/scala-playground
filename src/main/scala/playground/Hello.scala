@@ -1,5 +1,5 @@
 package playground
 
 object Hello extends App {
-  println("You should run `~/.gradlew clean test` to execute the specs.")
+  println("You should run `sbt clean test` to execute the specs.")
 }
