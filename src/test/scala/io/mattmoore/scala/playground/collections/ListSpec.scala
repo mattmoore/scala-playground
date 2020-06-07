@@ -1,4 +1,4 @@
-package playground.collections
+package io.mattmoore.scala.playground.collections
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

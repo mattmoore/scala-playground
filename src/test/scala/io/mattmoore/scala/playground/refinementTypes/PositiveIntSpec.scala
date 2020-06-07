@@ -1,4 +1,4 @@
-package playground.refinementTypes
+package io.mattmoore.scala.playground.refinementTypes
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

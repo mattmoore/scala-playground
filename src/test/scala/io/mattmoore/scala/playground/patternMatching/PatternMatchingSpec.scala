@@ -1,4 +1,4 @@
-package playground.patternMatching
+package io.mattmoore.scala.playground.patternMatching
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

@@ -1,4 +1,4 @@
-package playground.implicits
+package io.mattmoore.scala.playground.implicits
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

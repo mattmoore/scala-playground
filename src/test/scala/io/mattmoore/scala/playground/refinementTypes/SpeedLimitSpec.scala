@@ -1,4 +1,4 @@
-package playground.refinementTypes
+package io.mattmoore.scala.playground.refinementTypes
 
 import eu.timepit.refined.api.{Refined, RefinedTypeOps}
 import eu.timepit.refined.boolean.{And, Not, Or}
