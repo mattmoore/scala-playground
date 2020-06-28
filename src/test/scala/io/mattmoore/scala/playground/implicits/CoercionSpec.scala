@@ -12,15 +12,20 @@ class CoercionSpec extends AnyFunSpec with Matchers {
     User(2, "janedoe")
   )
 
-  // Defining these implicit functions above the describe blocks to demonstrate that multiple implicit functions can be defined.
- 
-  implicit def stringToInt(string: String) = string.toInt
+  // Defining these implicit functions above the describe blocks to demonstrate that
+  // multiple implicit functions can be defined.
 
-  implicit def loadUser(userId: Int): User = users.find(_.id == userId).getOrElse(null)
+  implicit def stringToInt(string: String) =
+    string.toInt
 
-  implicit def loadUserOption(userId: Int): Option[User] = Option(loadUser(userId))
+  implicit def loadUser(userId: Int): User =
+    users.find(_.id == userId).getOrElse(null)
 
-  implicit def loadUserEither(userId: Int): Either[String, User] = loadUserOption(userId).toRight(s"Unable to load user $userId.")
+  implicit def loadUserOption(userId: Int): Option[User] =
+    Option(loadUser(userId))
+
+  implicit def loadUserEither(userId: Int): Either[String, User] =
+    loadUserOption(userId).toRight(s"Unable to load user $userId.")
 
   describe("type coercion via implicits for string to int conversion") {
     it("converts a string to a number, based on matching types with stringToInt") {
