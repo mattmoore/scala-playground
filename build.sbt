@@ -8,12 +8,13 @@ ThisBuild / scapegoatVersion := "1.4.6"
 
 scalacOptions := Seq("-deprecation", "-feature")
 
-lazy val root = project
+lazy val root = (project in file("."))
+  .aggregate(lucene)
   .settings(
     name := "scala-playground",
-    libraryDependencies ++= Seq(
+    libraryDependencies in ThisBuild ++= Seq(
       Refined.core,
-      scalaTest
+      Testing.scalaTest
     )
   )
 

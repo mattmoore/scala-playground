@@ -36,5 +36,7 @@ object Dependencies {
     lazy val lucene4s = "com.outr" %% "lucene4s" % "1.10.0"
   }
 
-  lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
+  object Testing {
+    lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
+  }
 }
