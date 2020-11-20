@@ -6,6 +6,8 @@ ThisBuild / organization := "io.mattmoore"
 ThisBuild / organizationName := "mattmoore"
 ThisBuild / scapegoatVersion := "1.4.6"
 
+scalacOptions := Seq("-deprecation", "-feature")
+
 lazy val root = (project in file("."))
   .settings(
     name := "scala-playground",

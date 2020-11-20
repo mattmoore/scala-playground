@@ -3,6 +3,8 @@ package io.mattmoore.scala.playground.implicits
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
+import scala.language.implicitConversions
+
 class CoercionSpec extends AnyFunSpec with Matchers {
 
   case class User(val id: Int, val username: String)
@@ -15,24 +17,14 @@ class CoercionSpec extends AnyFunSpec with Matchers {
   // Defining these implicit functions above the describe blocks to demonstrate that
   // multiple implicit functions can be defined.
 
-  implicit def stringToInt(string: String) =
-    string.toInt
-
   implicit def loadUser(userId: Int): User =
-    users.find(_.id == userId).getOrElse(null)
+    users.find(_.id == userId).orNull
 
   implicit def loadUserOption(userId: Int): Option[User] =
     Option(loadUser(userId))
 
   implicit def loadUserEither(userId: Int): Either[String, User] =
     loadUserOption(userId).toRight(s"Unable to load user $userId.")
-
-  describe("type coercion via implicits for string to int conversion") {
-    it("converts a string to a number, based on matching types with stringToInt") {
-      val x: Int = "5"
-      x shouldBe 5
-    }
-  }
 
   describe("type coercion via implicit for loading a person record") {
     it("can load a user for the given user ID") {

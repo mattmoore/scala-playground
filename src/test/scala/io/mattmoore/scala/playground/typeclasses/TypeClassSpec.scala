@@ -22,11 +22,11 @@ class TypeClassSpec extends AnyFunSpec with Matchers {
       }
 
       it("dogs bark") {
-        (new Dog).hello shouldBe "bark"
+        (new Dog).hello() shouldBe "bark"
       }
 
       it("birds chirp") {
-        (new Bird).hello shouldBe "chirp"
+        (new Bird).hello() shouldBe "chirp"
       }
     }
 
@@ -36,19 +36,19 @@ class TypeClassSpec extends AnyFunSpec with Matchers {
       }
 
       final class Dog extends Speech {
-        def hello = "bark"
+        def hello() = "bark"
       }
 
       final class Bird extends Speech {
-        def hello = "chirp"
+        def hello() = "chirp"
       }
 
       it("barks like a dog") {
-        (new Dog).hello shouldBe "bark"
+        (new Dog).hello() shouldBe "bark"
       }
 
       it("chirps like a bird") {
-        (new Bird).hello shouldBe "chirp"
+        (new Bird).hello() shouldBe "chirp"
       }
     }
 

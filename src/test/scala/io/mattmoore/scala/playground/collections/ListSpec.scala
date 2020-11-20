@@ -22,7 +22,7 @@ class ListSpec extends AnyFunSpec with Matchers {
 
       it("should add the new item to the end of the list, but is still a ListBuffer") {
         list shouldBe List[String]("item 1", "item 2")
-        list shouldBe a[ListBuffer[String]]
+        list shouldBe a[ListBuffer[_]]
       }
     }
 
@@ -31,7 +31,7 @@ class ListSpec extends AnyFunSpec with Matchers {
 
       it("can be converted to an immutable List") {
         list shouldBe List[String]("item 1", "item 2")
-        list shouldBe a[List[String]]
+        list shouldBe a[List[_]]
       }
     }
   }
