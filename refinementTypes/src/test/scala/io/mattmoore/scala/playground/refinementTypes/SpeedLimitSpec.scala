@@ -1,9 +1,8 @@
 package io.mattmoore.scala.playground.refinementTypes
 
 import eu.timepit.refined.api.{Refined, RefinedTypeOps}
-import eu.timepit.refined.boolean.{And, Not, Or}
+import eu.timepit.refined.boolean.Not
 import eu.timepit.refined.numeric.Interval.OpenClosed
-import eu.timepit.refined.numeric._
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
