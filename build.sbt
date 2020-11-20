@@ -11,8 +11,9 @@ scalacOptions := Seq("-deprecation", "-feature")
 lazy val root = (project in file("."))
   .aggregate(
     akka,
-    refinementTypes,
-    lucene
+    collections,
+    lucene,
+    refinementTypes
   )
   .settings(
     name := "scala-playground",
@@ -27,6 +28,13 @@ lazy val akka = project
     libraryDependencies ++= Seq(
       Akka.actor,
       Akka.stream
+    )
+  )
+
+lazy val collections = project
+  .settings(
+    name := "collections",
+    libraryDependencies ++= Seq(
     )
   )
 
