@@ -10,6 +10,7 @@ scalacOptions := Seq("-deprecation", "-feature")
 
 lazy val root = (project in file("."))
   .aggregate(
+    akka,
     refinementTypes,
     lucene
   )
@@ -20,11 +21,12 @@ lazy val root = (project in file("."))
     )
   )
 
-lazy val refinementTypes = project
+lazy val akka = project
   .settings(
-    name := "refinement-types",
+    name := "akka",
     libraryDependencies ++= Seq(
-      Refined.core
+      Akka.actor,
+      Akka.stream
     )
   )
 
@@ -33,6 +35,14 @@ lazy val lucene = project
     name := "lucene",
     libraryDependencies ++= Seq(
       Lucene.lucene4s
+    )
+  )
+
+lazy val refinementTypes = project
+  .settings(
+    name := "refinement-types",
+    libraryDependencies ++= Seq(
+      Refined.core
     )
   )
 
