@@ -15,6 +15,7 @@ lazy val root = (project in file("."))
     catamorphisms,
     collections,
     implicits,
+    lucene,
     oopVsFp,
     patternMatching,
     refinementTypes,
@@ -54,6 +55,14 @@ lazy val collections = project
 lazy val implicits = project
   .settings(
     name := "implicits"
+  )
+
+lazy val lucene = project
+  .settings(
+    name := "lucene",
+    libraryDependencies ++= Seq(
+      Lucene.lucene4s
+    )
   )
 
 lazy val oopVsFp = project
