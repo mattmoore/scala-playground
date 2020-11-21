@@ -45,9 +45,7 @@ class OopClassVsScalaClass extends AnyFunSpec with Matchers {
   }
 
   describe("testing a class from outside of the test") {
-    import io.mattmoore.scala.playground.Person
-    import io.mattmoore.scala.playground.PersonOps.PersonOps
-
+    import io.mattmoore.scala.playground.oopVsFp.PersonOps.PersonOps
     val person = new Person("Matt")
 
     it("greets") {
