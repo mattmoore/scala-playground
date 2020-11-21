@@ -14,7 +14,8 @@ lazy val root = (project in file("."))
     collections,
     implicits,
     lucene,
-    refinementTypes
+    refinementTypes,
+    typeClasses
   )
   .settings(
     name := "scala-playground",
@@ -34,16 +35,12 @@ lazy val akka = project
 
 lazy val collections = project
   .settings(
-    name := "collections",
-    libraryDependencies ++= Seq(
-    )
+    name := "collections"
   )
 
 lazy val implicits = project
   .settings(
-    name := "implicits",
-    libraryDependencies ++= Seq(
-    )
+    name := "implicits"
   )
 
 lazy val lucene = project
@@ -60,6 +57,11 @@ lazy val refinementTypes = project
     libraryDependencies ++= Seq(
       Refined.core
     )
+  )
+
+lazy val typeClasses = project
+  .settings(
+    name := "typeclasses"
   )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.

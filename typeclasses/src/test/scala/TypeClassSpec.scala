@@ -1,5 +1,3 @@
-package io.mattmoore.scala.playground.typeclasses
-
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
