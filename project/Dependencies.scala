@@ -32,10 +32,6 @@ object Dependencies {
     lazy val protobufV3 = "com.typesafe.akka" %% "akka-protobuf-v3" % "2.6.6"
   }
 
-  object Lucene {
-    lazy val lucene4s = "com.outr" %% "lucene4s" % "1.10.0"
-  }
-
   object Testing {
     lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
   }
