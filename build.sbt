@@ -12,6 +12,7 @@ lazy val root = (project in file("."))
   .aggregate(
     akka,
     collections,
+    implicits,
     lucene,
     refinementTypes
   )
@@ -34,6 +35,13 @@ lazy val akka = project
 lazy val collections = project
   .settings(
     name := "collections",
+    libraryDependencies ++= Seq(
+    )
+  )
+
+lazy val implicits = project
+  .settings(
+    name := "implicits",
     libraryDependencies ++= Seq(
     )
   )
