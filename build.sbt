@@ -14,6 +14,7 @@ lazy val root = (project in file("."))
     collections,
     implicits,
     lucene,
+    patternMatching,
     refinementTypes,
     typeClasses
   )
@@ -49,6 +50,11 @@ lazy val lucene = project
     libraryDependencies ++= Seq(
       Lucene.lucene4s
     )
+  )
+
+lazy val patternMatching = project
+  .settings(
+    name := "pattern-matching"
   )
 
 lazy val refinementTypes = project
