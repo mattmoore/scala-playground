@@ -1,4 +1,4 @@
-package io.mattmoore.scala.playground.catamorphism
+package io.mattmoore.scala.playground.catamorphisms
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
