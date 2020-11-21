@@ -11,6 +11,7 @@ scalacOptions := Seq("-deprecation", "-feature")
 lazy val root = (project in file("."))
   .aggregate(
     akka,
+    cats,
     catamorphisms,
     collections,
     implicits,
@@ -34,6 +35,11 @@ lazy val akka = project
       Akka.actor,
       Akka.stream
     )
+  )
+
+lazy val cats = project
+  .settings(
+    name := "cats"
   )
 
 lazy val catamorphisms = project
