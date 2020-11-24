@@ -10,7 +10,7 @@ import org.scalatest.matchers.should.Matchers
 class LuceneSpec extends AnyFunSpec with Matchers {
   describe("indexing a document") {
     val directory = Paths.get("index")
-    val lucene = new DirectLucene(Nil, directory = Option(directory))
+    val lucene = new DirectLucene(Nil)
 
     val name = lucene.create.field[String]("name")
     val address = lucene.create.field[String]("address")
