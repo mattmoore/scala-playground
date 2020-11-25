@@ -14,6 +14,10 @@ object Dependencies {
     lazy val effect = "org.typelevel" %% "cats-effect" % "2.0.0"
   }
 
+  object Lucene {
+    lazy val lucene4s = "com.outr" %% "lucene4s" % "1.10.0"
+  }
+
   object Refined {
     lazy val core = "eu.timepit" %% "refined" % "0.9.13"
     lazy val cats = "eu.timepit" %% "refined-cats" % "0.9.13"
