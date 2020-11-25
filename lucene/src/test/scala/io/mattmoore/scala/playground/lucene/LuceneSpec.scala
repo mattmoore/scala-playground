@@ -92,7 +92,7 @@ class LuceneSpec extends AnyFunSpec with Matchers {
       val id: Field[Id[Person]] = lucene.create.stringifiedField[Id[Person]]("id", fullTextSearchable = false)
     }
 
-    val lucene = new DirectLucene(uniqueFields = List("name"), defaultFullTextSearchable = true, autoCommit = true)
+    val lucene = new DirectLucene(uniqueFields = List("id"), defaultFullTextSearchable = true, autoCommit = true)
     val people = lucene.create.searchable[SearchablePerson]
 
     people.insert(Person(Id("F1D8E1F9-8E5E-452A-A3CC-FF71C7BF1CFE"), "John Doe", "123 Somewhere Rd.")).index()
