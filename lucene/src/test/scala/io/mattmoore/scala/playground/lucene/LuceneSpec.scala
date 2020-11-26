@@ -1,5 +1,7 @@
 package io.mattmoore.scala.playground.lucene
 
+import java.util.UUID
+
 import com.outr.lucene4s.field.Field
 import com.outr.lucene4s.keyword.KeywordIndexing
 import com.outr.lucene4s.mapper.Searchable
@@ -78,25 +80,21 @@ class LuceneSpec extends AnyFunSpec with Matchers {
   }
 
   describe("searchable classes") {
-    case class Person(id: Id[Person], name: String, address: String)
-
-    case class Id[T](value: String) {
-      override def toString: String = value
-    }
+    case class Person(id: UUID, name: String, address: String)
 
     trait SearchablePerson extends Searchable[Person] {
       override def idSearchTerms(person: Person): List[SearchTerm] = List(exact(id(person.id)))
 
-      implicit def stringifyId[T]: Stringify[Id[T]] = Stringify[Id[T]]((s: String) => Id[T](s))
+      implicit def stringifyUUID[T]: Stringify[T] = Stringify[T]((s: String) => UUID.fromString(s).asInstanceOf[T])
 
-      val id: Field[Id[Person]] = lucene.create.stringifiedField[Id[Person]]("id", fullTextSearchable = false)
+      val id: Field[UUID] = lucene.create.stringifiedField[UUID]("id", fullTextSearchable = false)
     }
 
     val lucene = new DirectLucene(uniqueFields = List("id"), defaultFullTextSearchable = true, autoCommit = true)
     val people = lucene.create.searchable[SearchablePerson]
 
-    people.insert(Person(Id("F1D8E1F9-8E5E-452A-A3CC-FF71C7BF1CFE"), "John Doe", "123 Somewhere Rd.")).index()
-    people.insert(Person(Id("AFD0333E-E697-4ACC-8A08-A79C01250566"), "Jane Doe", "123 Somewhere Rd.")).index()
+    people.insert(Person(UUID.fromString("F1D8E1F9-8E5E-452A-A3CC-FF71C7BF1CFE"), "John Doe", "123 Somewhere Rd.")).index()
+    people.insert(Person(UUID.fromString("AFD0333E-E697-4ACC-8A08-A79C01250566"), "Jane Doe", "123 Somewhere Rd.")).index()
 
     describe("search the index with a query that matches Jane") {
       val paged = people.query().filter("ja*").search()
@@ -104,7 +102,7 @@ class LuceneSpec extends AnyFunSpec with Matchers {
       it("returns matching result") {
         paged.total shouldBe 1
         paged.entries shouldBe Vector(Person(
-          Id("AFD0333E-E697-4ACC-8A08-A79C01250566"),
+          UUID.fromString("AFD0333E-E697-4ACC-8A08-A79C01250566"),
           "Jane Doe",
           "123 Somewhere Rd."
         ))
