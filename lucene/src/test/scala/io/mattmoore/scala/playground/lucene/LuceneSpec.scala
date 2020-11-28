@@ -21,6 +21,16 @@ class LuceneSpec extends AnyFunSpec with Matchers {
     lucene.doc().fields(name("Jane Doe"), address("123 Somewhere Rd.")).index()
 
     describe("return all results in the index") {
+      val paged = lucene.query().search()
+
+      it("creates a new index and returns search results") {
+        paged.total shouldBe 2
+        paged.results.map(_ (name)) contains "Jane Doe"
+        paged.results.map(_ (name)) contains "John Doe"
+      }
+    }
+
+    describe("return all results in the index sorted by name") {
       val paged = lucene.query().sort(Sort(name)).search()
 
       it("creates a new index and returns search results") {
