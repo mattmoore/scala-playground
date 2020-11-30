@@ -90,21 +90,39 @@ class LuceneSpec extends AnyFunSpec with Matchers {
   }
 
   describe("searchable classes") {
-    case class Person(id: UUID, name: String, address: String)
+    case class Person(id: UUID, name: String, address: String, aliases: List[String])
 
     trait SearchablePerson extends Searchable[Person] {
       override def idSearchTerms(person: Person): List[SearchTerm] = List(exact(id(person.id)))
 
-      implicit def stringifyUUID[T]: Stringify[T] = Stringify[T]((s: String) => UUID.fromString(s).asInstanceOf[T])
+      implicit def stringify[T <: String]: Stringify[T] = Stringify[T]((s: String) => s.asInstanceOf[T])
+
+      implicit def stringifyUUID[T <: UUID]: Stringify[T] = Stringify[T]((s: String) => UUID.fromString(s).asInstanceOf[T])
 
       val id: Field[UUID] = lucene.create.stringifiedField[UUID]("id", fullTextSearchable = false)
+
+      val name: Field[String] = lucene.create.stringifiedField[String]("name", fullTextSearchable = true)
     }
 
     val lucene = new DirectLucene(uniqueFields = List("id"), defaultFullTextSearchable = true, autoCommit = true)
     val people = lucene.create.searchable[SearchablePerson]
 
-    people.insert(Person(UUID.fromString("F1D8E1F9-8E5E-452A-A3CC-FF71C7BF1CFE"), "John Doe", "123 Somewhere Rd.")).index()
-    people.insert(Person(UUID.fromString("AFD0333E-E697-4ACC-8A08-A79C01250566"), "Jane Doe", "123 Somewhere Rd.")).index()
+    val john = Person(
+      UUID.fromString("F1D8E1F9-8E5E-452A-A3CC-FF71C7BF1CFE"),
+      "John Doe",
+      "123 Somewhere Rd.",
+      List("johnny")
+    )
+
+    val jane = Person(
+      UUID.fromString("AFD0333E-E697-4ACC-8A08-A79C01250566"),
+      "Jane Doe",
+      "123 Somewhere Rd.",
+      List("janey")
+    )
+
+    people.insert(john).index()
+    people.insert(jane).index()
 
     describe("search the index with a query that matches Jane") {
       val paged = people.query().filter("ja*").search()
@@ -114,7 +132,8 @@ class LuceneSpec extends AnyFunSpec with Matchers {
         paged.entries shouldBe Vector(Person(
           UUID.fromString("AFD0333E-E697-4ACC-8A08-A79C01250566"),
           "Jane Doe",
-          "123 Somewhere Rd."
+          "123 Somewhere Rd.",
+          List("janey")
         ))
         paged.results.length shouldBe 1
       }
