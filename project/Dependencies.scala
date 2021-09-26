@@ -19,16 +19,17 @@ object Dependencies {
   }
 
   object Refined {
-    lazy val core = "eu.timepit" %% "refined" % "0.9.13"
-    lazy val cats = "eu.timepit" %% "refined-cats" % "0.9.13"
-    lazy val eval = "eu.timepit" %% "refined-eval" % "0.9.13"
-    lazy val jsonPath = "eu.timepit" %% "refined-jsonpath" % "0.9.13"
-    lazy val pureConfig = "eu.timepit" %% "refined-pureconfig" % "0.9.13"
-    lazy val scalaCheck = "eu.timepit" %% "refined-scalacheck" % "0.9.13"
-    lazy val scalaz = "eu.timepit" %% "refined-scalaz" % "0.9.13"
-    lazy val scodec = "eu.timepit" %% "refined-scodec" % "0.9.13"
-    lazy val scopt = "eu.timepit" %% "refined-scopt" % "0.9.13"
-    lazy val shapeless = "eu.timepit" %% "refined-shapeless" % "0.9.13"
+    lazy val refinedVersion = "0.9.27"
+    lazy val core = "eu.timepit" %% "refined" % refinedVersion
+    lazy val cats = "eu.timepit" %% "refined-cats" % refinedVersion
+    lazy val eval = "eu.timepit" %% "refined-eval" % refinedVersion
+    lazy val jsonPath = "eu.timepit" %% "refined-jsonpath" % refinedVersion
+    lazy val pureConfig = "eu.timepit" %% "refined-pureconfig" % refinedVersion
+    lazy val scalaCheck = "eu.timepit" %% "refined-scalacheck" % refinedVersion
+    lazy val scalaz = "eu.timepit" %% "refined-scalaz" % refinedVersion
+    lazy val scodec = "eu.timepit" %% "refined-scodec" % refinedVersion
+    lazy val scopt = "eu.timepit" %% "refined-scopt" % refinedVersion
+    lazy val shapeless = "eu.timepit" %% "refined-shapeless" % refinedVersion
   }
 
   object Testing {
