@@ -34,6 +34,7 @@ object Dependencies {
 
   object Testing {
     lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
+    lazy val scalacheck = "org.scalacheck" %% "scalacheck" % "1.14.1" % Test
   }
 
   object Zio {

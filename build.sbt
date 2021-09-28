@@ -17,6 +17,7 @@ lazy val root = (project in file("."))
     lucene,
     oopVsFp,
     patternMatching,
+    propertyBasedTesting,
     refinementTypes,
     taglessFinal,
     typeclasses
@@ -35,6 +36,7 @@ lazy val collections = project
 lazy val implicits = project
 lazy val lucene = project
 lazy val oopVsFp = project
+lazy val propertyBasedTesting = project
 lazy val patternMatching = project
 lazy val refinementTypes = project
 lazy val taglessFinal = project
