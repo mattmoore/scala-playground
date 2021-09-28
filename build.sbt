@@ -18,6 +18,7 @@ lazy val root = (project in file("."))
     oopVsFp,
     patternMatching,
     refinementTypes,
+    taglessFinal,
     typeclasses
   )
   .settings(
@@ -36,4 +37,5 @@ lazy val lucene = project
 lazy val oopVsFp = project
 lazy val patternMatching = project
 lazy val refinementTypes = project
+lazy val taglessFinal = project
 lazy val typeclasses = project

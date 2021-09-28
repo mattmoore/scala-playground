@@ -10,8 +10,8 @@ object Dependencies {
   }
 
   object Cats {
-    lazy val core = "org.typelevel" %% "cats-core" % "2.0.0"
-    lazy val effect = "org.typelevel" %% "cats-effect" % "2.0.0"
+    lazy val core = "org.typelevel" %% "cats-core" % "2.6.1"
+    lazy val effect = "org.typelevel" %% "cats-effect" % "3.2.9"
   }
 
   object Lucene {
