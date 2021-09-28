@@ -13,6 +13,7 @@ lazy val root = (project in file("."))
     cats,
     catamorphisms,
     collections,
+    fs2,
     implicits,
     lucene,
     oopVsFp,
@@ -33,6 +34,7 @@ lazy val akka = project
 lazy val cats = project
 lazy val catamorphisms = project
 lazy val collections = project
+lazy val fs2 = project
 lazy val implicits = project
 lazy val lucene = project
 lazy val oopVsFp = project

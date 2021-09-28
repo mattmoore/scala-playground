@@ -14,6 +14,13 @@ object Dependencies {
     lazy val effect = "org.typelevel" %% "cats-effect" % "3.2.9"
   }
 
+  object FS2 {
+    lazy val fs2Version = "3.1.2"
+    lazy val core = "co.fs2" %% "fs2-io" % fs2Version
+    lazy val io = "co.fs2" %% "fs2-io" % fs2Version
+    lazy val reactiveStreams = "co.fs2" %% "fs2-reactive-streams" % fs2Version
+  }
+
   object Lucene {
     lazy val lucene4s = "com.outr" %% "lucene4s" % "1.10.0"
   }
