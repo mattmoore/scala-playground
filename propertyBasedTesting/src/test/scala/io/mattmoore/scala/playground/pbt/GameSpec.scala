@@ -15,8 +15,10 @@ object GameSpec extends Properties("Game") {
   implicit lazy val arbitraryGame: Arbitrary[Game] = Arbitrary(genGame)
 
   property("winner") = forAll { g: Game =>
-    (g.homeScore > g.awayScore && g.winner.contains(g.homeTeam)) ||
-    (g.awayScore > g.homeScore && g.winner.contains(g.awayTeam)) ||
-    (g.winner.isEmpty)
+    s"g.homeScore: ${g.homeScore}, g.awayScore: ${g.awayScore}, g.winner: ${g.winner}" |:
+      g.homeScore > g.awayScore ==> (g.winner.contains(g.homeTeam))
+
+    s"g.awayScore: ${g.awayScore}, g.homeScore: ${g.homeScore}, g.winner: ${g.winner}" |:
+      g.awayScore > g.homeScore ==> (g.winner.contains(g.awayTeam))
   }
 }

@@ -41,7 +41,7 @@ object Dependencies {
 
   object Testing {
     lazy val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
-    lazy val scalacheck = "org.scalacheck" %% "scalacheck" % "1.14.1" % "test"
+    lazy val scalacheck = "org.scalacheck" %% "scalacheck" % "1.15.4" % "test"
     lazy val scalacheckShapeless = "com.github.alexarchambault" %% "scalacheck-shapeless_1.15" % "1.3.0"
   }
 
