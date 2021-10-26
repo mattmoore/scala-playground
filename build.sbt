@@ -15,6 +15,7 @@ lazy val root = (project in file("."))
     collections,
     fs2,
     implicits,
+    kafka,
     lucene,
     oopVsFp,
     patternMatching,
@@ -36,6 +37,7 @@ lazy val catamorphisms = project
 lazy val collections = project
 lazy val fs2 = project
 lazy val implicits = project
+lazy val kafka = project
 lazy val lucene = project
 lazy val oopVsFp = project
 lazy val propertyBasedTesting = project
