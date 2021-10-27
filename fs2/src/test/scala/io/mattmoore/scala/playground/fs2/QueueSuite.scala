@@ -25,6 +25,11 @@ class QueueSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
     stream.evalMap(getAge).compile.toList.asserting(_ shouldBe List(4, 4, 6, 5))
   }
 
+  test("Infinite streams") {
+    val stream = Stream(1, 2, 3).repeat
+    stream.take(5).compile.toList shouldBe List(1, 2, 3, 1, 2)
+  }
+
   test("Pipes") {
     def pipe[F[_] : Sync](name: String): Stream[F, Int] => Stream[F, Int] =
       _.evalTap { index =>
