@@ -1,6 +1,6 @@
 package io.mattmoore.scala.playground.kafka
 
-import cats.effect.{ExitCode, IO, IOApp}
+import cats.effect._
 import fs2.kafka._
 
 import scala.concurrent.duration._
