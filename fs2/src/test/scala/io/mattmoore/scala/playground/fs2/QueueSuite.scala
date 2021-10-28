@@ -7,6 +7,7 @@ import cats.implicits._
 import fs2.Stream
 import org.scalatest.funsuite.AsyncFunSuite
 import org.scalatest.matchers.should.Matchers
+import scala.concurrent.duration._
 
 class QueueSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
   test("Creating a queue") {
@@ -30,7 +31,7 @@ class QueueSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
     stream.take(5).compile.toList shouldBe List(1, 2, 3, 1, 2)
   }
 
-  test("Pipes") {
+  test("Pipes are a way to create individual steps that can be run in a stream") {
     def pipe[F[_] : Sync](name: String): Stream[F, Int] => Stream[F, Int] =
       _.evalTap { index =>
         Sync[F].delay(
@@ -46,5 +47,10 @@ class QueueSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
       .compile
       .drain
       .asserting(_ shouldBe ())
+  }
+
+  test("Timer") {
+    val stream = Stream.awakeEvery[IO](5.seconds)
+    stream.take(2).compile.toList.asserting(_.size shouldBe 2)
   }
 }
