@@ -9,7 +9,7 @@ import org.scalatest.funsuite.AsyncFunSuite
 import org.scalatest.matchers.should.Matchers
 import scala.concurrent.duration._
 
-class QueueSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
+class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
   test("Creating a queue") {
     val program = for {
       queue <- Queue.unbounded[IO, Option[Int]]
