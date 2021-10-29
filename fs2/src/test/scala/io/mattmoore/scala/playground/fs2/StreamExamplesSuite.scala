@@ -7,10 +7,14 @@ import cats.implicits._
 import fs2.Stream
 import org.scalatest.funsuite.AsyncFunSuite
 import org.scalatest.matchers.should.Matchers
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 import scala.concurrent.duration._
 
 class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
+  implicit def unsafeLogger[F[_]: Sync] = Slf4jLogger.getLogger[F]
+
   test("Effectful streams") {
     def getAge(name: String): IO[Int] = IO(name.length)
     Stream("John", "Paul", "George", "Ringo")
@@ -43,12 +47,12 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
       .asserting(_ shouldBe List(1, 2, 3))
   }
 
-  test("flatMap exec into iterator") {
+  test("Stream.eval flatMapped (>>) into iterator") {
     (
-      Stream.exec(IO(println("Yo!")))
-        *> Stream.fromIterator[IO](Iterator.empty[Int], 1)
+      Stream.eval(Logger[IO].info("Yo!"))
+        >> Stream.fromIterator[IO](List(1, 2, 3).iterator, 1)
     ).compile.toList
-      .asserting(_ shouldBe List.empty)
+      .asserting(_ shouldBe List(1, 2, 3))
   }
 
   test("Pipes are a way to create individual steps that can be run in a stream") {
