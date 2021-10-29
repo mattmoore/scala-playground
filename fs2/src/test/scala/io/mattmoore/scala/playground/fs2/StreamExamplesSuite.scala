@@ -55,6 +55,14 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
       .asserting(_ shouldBe List(1, 2, 3))
   }
 
+  test("Stream.exec flatMapped (*>) into iterator - iterator does nothing") {
+    (
+      Stream.exec(Logger[IO].info("Yo!"))
+        *> Stream.fromIterator[IO](List(1, 2, 3).iterator, 1)
+      ).compile.toList
+      .asserting(_ shouldBe List.empty)
+  }
+
   test("Pipes are a way to create individual steps that can be run in a stream") {
     def pipe[F[_]: Sync](name: String): Stream[F, Int] => Stream[F, Int] =
       _.evalTap { index =>
