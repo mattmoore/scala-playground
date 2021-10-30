@@ -21,7 +21,7 @@ object ProducerStandalone extends IOApp {
       .flatMap { producer =>
         events
           .map(v => ProducerRecords.one(ProducerRecord("topic", v._1, v._2)))
-          .evalMap(producer.produce(_))
+          .evalMap(producer.produce)
       }
       .compile
       .drain
