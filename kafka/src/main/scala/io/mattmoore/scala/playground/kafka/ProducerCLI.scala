@@ -3,8 +3,6 @@ package io.mattmoore.scala.playground.kafka
 import cats.effect._
 import fs2.kafka._
 
-import scala.language.postfixOps
-
 object ProducerCLI extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
     val (key, value) = (args.head, args.drop(1).mkString(" "))

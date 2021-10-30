@@ -72,7 +72,7 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
       }
 
     Stream
-      .emits(1 to 10000)
+      .emits(1 to 100)
       .covary[IO]
       .through(pipe("A"))
       .through(pipe("B"))

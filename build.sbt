@@ -38,6 +38,8 @@ lazy val collections = project
 lazy val fs2 = project
 lazy val implicits = project
 lazy val kafka = project
+  .configs(IntegrationTest)
+  .settings(Defaults.itSettings)
 lazy val lucene = project
 lazy val oopVsFp = project
 lazy val propertyBasedTesting = project
