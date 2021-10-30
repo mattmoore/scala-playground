@@ -13,7 +13,7 @@ object Converter extends IOApp.Simple {
       .readAll(Path("fs2/testdata/fahrenheit.txt"))
       .through(text.utf8.decode)
       .through(text.lines)
-      .filter(s => !s.trim.isEmpty && !s.startsWith("//"))
+      .filter(s => s.trim.nonEmpty && !s.startsWith("//"))
       .map(line => fahrenheitToCelsius(line.toDouble).toString)
       .intersperse("\n")
       .through(text.utf8.encode)
