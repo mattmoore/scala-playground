@@ -21,6 +21,7 @@ lazy val root = (project in file("."))
     patternMatching,
     propertyBasedTesting,
     refinementTypes,
+    spark,
     taglessFinal,
     typeclasses
   )
@@ -45,5 +46,6 @@ lazy val oopVsFp = project
 lazy val propertyBasedTesting = project
 lazy val patternMatching = project
 lazy val refinementTypes = project
+lazy val spark = project
 lazy val taglessFinal = project
 lazy val typeclasses = project
