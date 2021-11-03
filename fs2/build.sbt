@@ -1,6 +1,6 @@
 name := "fs2"
 
-lazy val fs2Version = "3.1.6"
+lazy val fs2Version = "3.2.2"
 lazy val log4catsV = "2.1.1"
 
 libraryDependencies ++= Seq(
