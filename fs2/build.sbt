@@ -4,7 +4,7 @@ lazy val fs2Version = "3.2.2"
 lazy val log4catsV = "2.1.1"
 
 libraryDependencies ++= Seq(
-  "co.fs2" %% "fs2-io" % fs2Version,
+  "co.fs2" %% "fs2-core" % fs2Version,
   "co.fs2" %% "fs2-io" % fs2Version,
   "co.fs2" %% "fs2-reactive-streams" % fs2Version,
   "org.typelevel" %% "cats-core" % "2.6.1",
