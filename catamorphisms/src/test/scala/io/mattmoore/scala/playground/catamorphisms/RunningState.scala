@@ -85,4 +85,41 @@ class RunningState extends AnyFunSuite with Matchers {
       (Map("Alice" -> 0, "Bob" -> 100), ("Bob", 50))
     )
   }
+
+  // TODO: Add computation to this example.
+  test("Multiple streams feeding into balance calculations.") {
+    val initialBalances = Map(
+      "Alice" -> 100,
+      "Bob" -> 200,
+      "Mary" -> 200,
+      "John" -> 100
+    )
+    val transactionsA = Vector(
+      ("Alice", BigDecimal(50)),
+      ("Alice", BigDecimal(50)),
+      ("Bob", BigDecimal(50)),
+      ("Bob", BigDecimal(50))
+    )
+    val transactionsB = Vector(
+      ("Mary", BigDecimal(50)),
+      ("Mary", BigDecimal(50)),
+      ("John", BigDecimal(50)),
+      ("John", BigDecimal(50))
+    )
+    val transactionsC = Vector(
+      ("Anthony", BigDecimal(50)),
+      ("Anthony", BigDecimal(50)),
+      ("Sarah", BigDecimal(50)),
+      ("Sarah", BigDecimal(50))
+    )
+
+    val streamA = Stream.emits(transactionsA)
+    val streamB = Stream.emits(transactionsB)
+    val streamC = Stream.emits(transactionsC)
+
+    val combinedStream = Stream(streamA, streamB, streamC).flatten
+
+    val result = combinedStream.compile.toVector
+    println(result)
+  }
 }

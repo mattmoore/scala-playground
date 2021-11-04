@@ -1,10 +1,11 @@
 package io.mattmoore.scala.playground.fs2
 
+import cats.ApplicativeError
 import cats.effect.std.Queue
 import cats.effect.testing.scalatest.AsyncIOSpec
 import cats.effect.{IO, Sync}
 import cats.implicits._
-import fs2.Stream
+import fs2._
 import org.scalatest.funsuite.AsyncFunSuite
 import org.scalatest.matchers.should.Matchers
 import org.typelevel.log4cats.Logger
@@ -59,8 +60,36 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
     (
       Stream.exec(Logger[IO].info("Yo!"))
         *> Stream.fromIterator[IO](List(1, 2, 3).iterator, 1)
-      ).compile.toList
+    ).compile.toList
       .asserting(_ shouldBe List.empty)
+  }
+
+  test("Multiple streams") {
+    val a = Stream(1, 2, 3)
+    val b = Stream(4, 5, 6)
+    val c = Stream(a, b).flatten
+    val result = c.compile.toList
+    result shouldBe List(1, 2, 3, 4, 5, 6)
+  }
+
+  test("Multiple streams with an empty stream in the midst") {
+    val a = Stream(1, 2, 3)
+    val b = Stream.empty
+    val c = Stream(7, 8, 9)
+    val d = Stream(a, b, c).flatten
+    val result = d.compile.toList
+    result shouldBe List(1, 2, 3, 7, 8, 9)
+  }
+
+  test("Multiple streams from lists, with a stream from empty list in the midst, with for comprehension and foldMonoid") {
+    val result = {
+      for {
+        a <- Stream(List(1, 2, 3))
+        b <- Stream(List.empty)
+        c <- Stream(List(7, 8, 9))
+      } yield a ++ b ++ c
+    }.compile.foldMonoid
+    result shouldBe List(1, 2, 3, 7, 8, 9)
   }
 
   test("Pipes are a way to create individual steps that can be run in a stream") {
@@ -84,7 +113,7 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
 
   test("Timer") {
     Stream
-      .awakeEvery[IO](5.seconds)
+      .awakeEvery[IO](2.seconds)
       .take(2)
       .compile
       .toList
