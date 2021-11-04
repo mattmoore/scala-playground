@@ -32,6 +32,34 @@ class RunningState extends AnyFunSuite with Matchers {
       bal + (name -> (bal(name) - amount))
     }
 
+  test("Using fold, we get the final balance result, but do not keep the history of transactions in the output.") {
+    val result = updateBalancesFold(initialBalances, transactions)
+    result shouldBe Map("Alice" -> 0, "Bob" -> 100)
+  }
+
+  def updateBalancesFoldWithTransactions(
+    balances: Balances,
+    transactions: Vector[Transaction]
+  ): (Balances, Vector[(String, BigDecimal)]) =
+    transactions.foldLeft((balances, Vector.empty[Transaction])) { case ((bal, trxs), (name, amount)) =>
+      val updatedBalances = bal + (name -> (bal(name) - amount))
+      val updatedTransactions = trxs :+ (name, amount)
+      (updatedBalances, updatedTransactions)
+    }
+
+  test("Another fold where we get the final balance result and also keep the history of transactions in the output.") {
+    val result = updateBalancesFoldWithTransactions(initialBalances, transactions)
+    result shouldBe (
+      Map("Alice" -> 0, "Bob" -> 100),
+      Vector(
+        ("Alice", 50),
+        ("Alice", 50),
+        ("Bob", 50),
+        ("Bob", 50)
+      )
+    )
+  }
+
   def updateBalancesStateMonad(
     transactions: Vector[Transaction]
   ): State[Balances, Vector[Transaction]] =
@@ -46,6 +74,12 @@ class RunningState extends AnyFunSuite with Matchers {
       }
     }
 
+  test("Using State monad, we get the final balance calculation, while also maintaining transaction history.") {
+    val result = updateBalancesStateMonad(transactions).run(initialBalances).value
+    result._1 shouldBe Map("Alice" -> 0, "Bob" -> 100)
+    result._2 shouldBe transactions
+  }
+
   def updateBalancesStream[F[_]](
     initialBalances: Balances,
     transactions: Stream[F, Transaction]
@@ -54,17 +88,6 @@ class RunningState extends AnyFunSuite with Matchers {
       val newBalance = balances + (name -> (balances(name) - amount))
       (newBalance, (name, amount))
     }
-
-  test("Using fold, we get the final balance result, but do not keep the history of transactions in the output.") {
-    val result = updateBalancesFold(initialBalances, transactions)
-    result shouldBe Map("Alice" -> 0, "Bob" -> 100)
-  }
-
-  test("Using State monad, we get the final balance calculation, while also maintaining transaction history.") {
-    val result = updateBalancesStateMonad(transactions).run(initialBalances).value
-    result._1 shouldBe Map("Alice" -> 0, "Bob" -> 100)
-    result._2 shouldBe transactions
-  }
 
   test("Using fs2.Stream.") {
     val result = updateBalancesStream(initialBalances, Stream.emits(transactions)).compile.toVector

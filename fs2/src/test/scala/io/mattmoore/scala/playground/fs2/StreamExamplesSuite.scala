@@ -1,6 +1,5 @@
 package io.mattmoore.scala.playground.fs2
 
-import cats.ApplicativeError
 import cats.effect.std.Queue
 import cats.effect.testing.scalatest.AsyncIOSpec
 import cats.effect.{IO, Sync}
