@@ -27,7 +27,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     name := "scala-playground",
-    libraryDependencies in ThisBuild ++= Seq(
+    ThisBuild / libraryDependencies ++= Seq(
       Testing.scalaTest
     )
   )
