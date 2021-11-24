@@ -33,6 +33,7 @@ lazy val root = (project in file("."))
   )
 
 lazy val akka = project
+lazy val applyUnapply = project
 lazy val cats = project
 lazy val catamorphisms = project
 lazy val collections = project
