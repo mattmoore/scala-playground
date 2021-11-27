@@ -13,6 +13,7 @@ lazy val root = (project in file("."))
     cats,
     catamorphisms,
     collections,
+    enums,
     fs2,
     implicits,
     kafka,
@@ -37,6 +38,7 @@ lazy val applyUnapply = project
 lazy val cats = project
 lazy val catamorphisms = project
 lazy val collections = project
+lazy val enums = project
 lazy val fs2 = project
 lazy val implicits = project
 lazy val kafka = project
