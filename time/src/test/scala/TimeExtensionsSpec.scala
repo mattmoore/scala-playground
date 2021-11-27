@@ -40,4 +40,16 @@ class TimeExtensionsSpec extends AnyFunSpec with Matchers {
       }
     }
   }
+
+  describe("LongDateExtensions") {
+    describe("toLocalDate") {
+      val millis = 1635724800000L
+
+      it("transforms Long millis to LocalDate, in UTC") {
+        val expected = LocalDate.of(2021, 11, 1)
+        val actual = millis.toLocalDate
+        actual shouldBe expected
+      }
+    }
+  }
 }

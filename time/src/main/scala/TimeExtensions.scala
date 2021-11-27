@@ -13,4 +13,9 @@ object TimeExtensions {
     def toEpochMilli: Long =
       time.toInstant.toEpochMilli
   }
+
+  implicit class LongDateExtensions(millis: Long) {
+    def toLocalDate: LocalDate =
+      LocalDate.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"))
+  }
 }
