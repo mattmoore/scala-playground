@@ -24,6 +24,7 @@ lazy val root = (project in file("."))
     refinementTypes,
     spark,
     taglessFinal,
+    time,
     typeclasses
   )
   .settings(
@@ -51,4 +52,5 @@ lazy val patternMatching = project
 lazy val refinementTypes = project
 lazy val spark = project
 lazy val taglessFinal = project
+lazy val time = project
 lazy val typeclasses = project
