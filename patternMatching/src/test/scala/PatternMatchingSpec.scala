@@ -1,3 +1,6 @@
+import cats.effect._
+import cats.effect.unsafe.implicits.global
+import cats.implicits._
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -26,7 +29,7 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 1
     val actual = maybeValue match {
       case Some(v) => v
-      case None => 0
+      case None    => 0
     }
     actual shouldBe expected
   }
@@ -36,7 +39,7 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 0
     val actual = list match {
       case x :: xs => 1
-      case Nil => 0
+      case Nil     => 0
     }
     actual shouldBe expected
   }
@@ -46,7 +49,7 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 1
     val actual = list match {
       case x :: xs => 1
-      case Nil => 0
+      case Nil     => 0
     }
     actual shouldBe expected
   }
@@ -56,7 +59,7 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 1
     val actual = list match {
       case x :: xs => 1
-      case Nil => 0
+      case Nil     => 0
     }
     actual shouldBe expected
   }
@@ -66,8 +69,8 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 1
     val actual = list match {
       case x :: Nil => 1
-      case x :: xs => 2
-      case Nil => 0
+      case x :: xs  => 2
+      case Nil      => 0
     }
     actual shouldBe expected
   }
@@ -77,8 +80,8 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
     val expected = 2
     val actual = list match {
       case x :: Nil => 1
-      case x :: xs => 2
-      case Nil => 0
+      case x :: xs  => 2
+      case Nil      => 0
     }
     actual shouldBe expected
   }
@@ -148,6 +151,19 @@ class PatternMatchingSpec extends AnyFreeSpec with Matchers {
 
     val expected = false
     val actual = !merchantStartDate.isAfter(txnUseDate) && merchantStopDate.fold(true)(!_.isBefore(txnUseDate))
+    actual shouldBe expected
+  }
+
+  "Match case class on traverse" in {
+    case class Person(firstName: String, lastName: String)
+    val people = List(
+      Person("Matt", "Moore"),
+      Person("John", "Doe")
+    )
+    val expected = List("Matt Moore", "John Doe")
+    val actual = people.traverse { case Person(firstName, lastName) =>
+      IO.pure(s"$firstName $lastName")
+    }.unsafeRunSync()
     actual shouldBe expected
   }
 }
