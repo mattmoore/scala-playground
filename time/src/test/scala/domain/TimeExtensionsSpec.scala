@@ -1,4 +1,6 @@
-import TimeExtensions._
+package domain
+
+import domain.TimeExtensions._
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
