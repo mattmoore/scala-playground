@@ -128,4 +128,11 @@ class StreamExamplesSuite extends AsyncFunSuite with AsyncIOSpec with Matchers {
     } yield result
     program.asserting(_ shouldBe List(1, 2, 3))
   }
+
+  test("Joining stream results") {
+    val stream1 = Stream[IO, Int](1, 2, 3)
+    val stream2 = Stream[IO, Int](4, 5, 6)
+    val stream3 = Stream(stream1, stream2).parJoinUnbounded.compile.toList
+    stream3.asserting(_ shouldBe List(1, 2, 3, 4, 5, 6))
+  }
 }
